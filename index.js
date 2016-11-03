@@ -17,13 +17,13 @@ module.exports = function (continuable) {
 
     continuable(function again (err, value) {
       if(err) return cb(err)
-      console.log(value, isContinuable(value), isSource(value))
       if(isSource(value)) (read = value)(abort, cb) //if it's a source... then read from it
       else if(isContinuable(value)) value(again) //if it's another continuable... then continue
       else throw new Error('not a valid source stream or continuable')
     })
   }
 }
+
 
 
 
